@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-navy-50: #f2f5fb;
+  --color-navy-100: #e3e9f6;
+  --color-navy-200: #c7d2ea;
+  --color-navy-300: #9aabd3;
+  --color-navy-400: #6b82b8;
+  --color-navy-500: #48609a;
+  --color-navy-600: #364b7e;
+  --color-navy-700: #283961;
+  --color-navy-800: #172447;
+  --color-navy-900: #0f1a3a;
+  --color-navy-950: #0a1128;
+
+  --color-brand-50: #eef4ff;
+  --color-brand-100: #dbe7ff;
+  --color-brand-200: #bcd1ff;
+  --color-brand-300: #8fb0ff;
+  --color-brand-400: #5b8cff;
+  --color-brand-500: #3a6df0;
+  --color-brand-600: #2753d6;
+  --color-brand-700: #2143ac;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-800 antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  button:not(:disabled),
+  [role="button"] {
+    cursor: pointer;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-400);
+    outline-offset: 2px;
+  }
+}
+
+/* Subtle, purposeful motion only */
+@keyframes vl-pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(58, 109, 240, 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(58, 109, 240, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(58, 109, 240, 0);
+  }
+}
+
+@keyframes vl-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes vl-flow {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 16px;
+  }
+}
+
+.vl-pulse {
+  animation: vl-pulse-ring 1.8s ease-out infinite;
+}
+
+.vl-fade-in {
+  animation: vl-fade-in 0.25s ease-out both;
+}
+
+.vl-flow-line {
+  background-image: linear-gradient(
+    to bottom,
+    var(--color-brand-400) 50%,
+    transparent 50%
+  );
+  background-size: 2px 8px;
+  animation: vl-flow 0.6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vl-pulse,
+  .vl-fade-in,
+  .vl-flow-line {
+    animation: none;
+  }
+}
